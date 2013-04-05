@@ -1,10 +1,10 @@
 /* -------------------------------------------------
-      _       _     ___                            
- __ _| |_ _ _(_)___/ __| __ __ _ _ _  _ _  ___ _ _ 
+      _       _     ___
+ __ _| |_ _ _(_)___/ __| __ __ _ _ _  _ _  ___ _ _
 / _` |  _| '_| / -_)__ \/ _/ _` | ' \| ' \/ -_) '_|
-\__, |\__|_| |_\___|___/\__\__,_|_||_|_||_\___|_|  
-|___/                                          
-    
+\__, |\__|_| |_\___|___/\__\__,_|_||_|_||_\___|_|
+|___/
+
 gtrieScanner: quick discovery of network motifs
 Released under Artistic License 2.0
 (see README and LICENSE)
@@ -62,7 +62,7 @@ void Graph::_init() {
   _io_ds = NULL;
   _in = NULL;
   _out = NULL;
-  _num_nodes = _num_edges = 0;  
+  _num_nodes = _num_edges = 0;
 }
 
 void Graph::_createGraph(int num_nodes) {
@@ -175,7 +175,7 @@ void Graph::rmEdge(int a, int b, int c) {
 void Graph::rmEdgesNode(int v) {
   int i;
 
-  for (i=0; i<numNodes(); i++) 
+  for (i=0; i<numNodes(); i++)
     if (getEdge(i,v))
       rmEdge(i,v,getEdge(i,v));
     if (getEdge(v,i))
@@ -184,31 +184,31 @@ void Graph::rmEdgesNode(int v) {
 
 // -----------------------------------------------
 
-int *Graph::makeOutDegreeSequence() {
-  int i;
-  for (i=0; i<numNodes(); i++)
-    _out_ds[i]=nodeEdges(i);
-  sort(_out_ds, _out_ds+numNodes());
-  return _out_ds;
-}
-
-int *Graph::makeInDegreeSequence() {
-  int i;
-  for (i=0; i<numNodes(); i++)
-    _in_ds[i]=nodeInEdges(i);
-  sort(_in_ds, _in_ds+numNodes());
-  return _in_ds;
-}
-
-iPair *Graph::makeIODegreeSequence() {
-  int i;
-  for (i=0; i<numNodes(); i++) {
-    _io_ds[i].first = nodeInEdges(i);
-    _io_ds[i].second = nodeEdges(i);
-  }
-  //sort(_io_ds, _io_ds+numNodes());
-  return _io_ds;
-}
+//int *Graph::makeOutDegreeSequence() {
+//  int i;
+//  for (i=0; i<numNodes(); i++)
+//    _out_ds[i]=nodeEdges(i);
+//  sort(_out_ds, _out_ds+numNodes());
+//  return _out_ds;
+//}
+//
+//int *Graph::makeInDegreeSequence() {
+//  int i;
+//  for (i=0; i<numNodes(); i++)
+//    _in_ds[i]=nodeInEdges(i);
+//  sort(_in_ds, _in_ds+numNodes());
+//  return _in_ds;
+//}
+//
+//iPair *Graph::makeIODegreeSequence() {
+//  int i;
+//  for (i=0; i<numNodes(); i++) {
+//    _io_ds[i].first = nodeInEdges(i);
+//    _io_ds[i].second = nodeEdges(i);
+//  }
+//  //sort(_io_ds, _io_ds+numNodes());
+//  return _io_ds;
+//}
 
 
 // -----------------------------------------------
@@ -221,7 +221,7 @@ int Graph::readFile(char *file_name, bool undir) {
     fprintf(stderr,"Could not open \"%s\"!\n",file_name);
     return 0;
   }
-  
+
   int size = 0, a, b, c, max=0;
   std::vector<int> va, vb, vc;
 
@@ -252,7 +252,7 @@ int Graph::readFile(char *file_name, bool undir) {
       if (!getEdge(va[i]-1,vb[i]-1))
 	addEdge(va[i]-1,vb[i]-1,vc[i]);
   }
-  
+
 
   return 1;
 }
@@ -261,19 +261,19 @@ int Graph::readFile(char *file_name, bool undir) {
 // Collect edges
 // -----------------------------------------------
 
-void Graph::vecEdges(vEdges &v) {
-  int i, count = 0;
-  list<iPair>::iterator ii;
-  
-  v.resize(numEdges());
-
-  for (i=0; i<numNodes(); i++) 
-    for(ii=_adjL[i].begin(); ii!=_adjL[i].end(); ii++) {
-      v[count].first = i;
-      v[count++].second = (*ii).first;
-    }
-  
-}
+//void Graph::vecEdges(vEdges &v) {
+//  int i, count = 0;
+//  list<iPair>::iterator ii;
+//
+//  v.resize(numEdges());
+//
+//  for (i=0; i<numNodes(); i++)
+//    for(ii=_adjL[i].begin(); ii!=_adjL[i].end(); ii++) {
+//      v[count].first = i;
+//      v[count++].second = (*ii).first;
+//    }
+//
+//}
 
 list<iPair> Graph::adjL(int v) {
   return _adjL[v];
